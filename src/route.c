@@ -1,6 +1,7 @@
 #include "route.h"
 
 /* Include route handlers */
+#include "route/v1/camera.h"
 #include "route/v1/example.h"
 #include "route/v1/filesystem.h"
 #include "route/v1/nvs.h"
@@ -91,6 +92,7 @@ esp_err_t register_routes() {
     ERR_CHECK(server_register(PROJECT_ROUTE_V1_NVS "/*", HTTP_GET, nvs_get_handler));
     ERR_CHECK(server_register(PROJECT_ROUTE_V1_NVS,      HTTP_GET, nvs_get_handler));
 
+    ERR_CHECK(server_register("/api/v1/camera",      HTTP_GET, camera_get_handler));
     ERR_CHECK(server_register("/api/v1/led/timer",   HTTP_POST, led_timer_post_handler));
     ERR_CHECK(server_register("/api/v1/ota",         HTTP_POST, ota_post_handler));
     ERR_CHECK(server_register("/api/v1/system/info", HTTP_GET, system_info_get_handler));
