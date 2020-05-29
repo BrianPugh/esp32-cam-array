@@ -1,3 +1,4 @@
+Firmware for forming a camera array out of multiple ESP32-CAM
 
 # esp32-cam-array
 

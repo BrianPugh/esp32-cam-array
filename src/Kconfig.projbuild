@@ -14,7 +14,7 @@ menu "esp32-cam-array Configuration"
 
     config PROJECT_MDNS_HOST_NAME
         string "mDNS Host Name"
-        default "esp-webserver"
+        default "esp32-cam"
         help
             Specify the domain name used in the mDNS service.
             Note that webpage also take it as a part of URL where it will send GET/POST requests to.
@@ -45,7 +45,7 @@ menu "esp32-cam-array Configuration"
     config PROJECT_INDICATOR_LED_GPIO
         int "Blink GPIO number"
         range 0 34
-        default 2
+        default 33
         help
             GPIO number (IOxx) to blink on and off to indicate status.
 

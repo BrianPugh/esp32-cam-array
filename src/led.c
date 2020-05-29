@@ -3,17 +3,18 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
+#include "led.h"
 
-/* Can use project configuration menu (idf.py menuconfig) to choose the GPIO to blink,
-   or you can edit the following line and set a number here.
+/* Can use project configuration menu (idf.py menuconfig) to choose the GPIO to blink
 */
-#define BLINK_GPIO CONFIG_BLINK_GPIO
 
 esp_err_t led_setup()
 {
     // TODO: Error handling
     gpio_pad_select_gpio(CONFIG_PROJECT_INDICATOR_LED_GPIO);
     gpio_set_direction(CONFIG_PROJECT_INDICATOR_LED_GPIO, GPIO_MODE_INPUT_OUTPUT);
+
+    gpio_set_level(CONFIG_PROJECT_INDICATOR_LED_GPIO, INDICATOR_LED_OFF);
     return ESP_OK;
 }
 

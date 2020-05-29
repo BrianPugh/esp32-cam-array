@@ -5,6 +5,9 @@
 #include "sdkconfig.h"
 #include "stdbool.h"
 
+/* On the ESP32-CAM, the LED is ON when gpio 33 is low */
+#define INDICATOR_LED_ON false
+#define INDICATOR_LED_OFF true
 
 /****
  * Setup hardware for LED.
