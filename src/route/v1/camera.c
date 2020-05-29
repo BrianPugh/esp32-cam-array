@@ -5,22 +5,6 @@
 
 static const char TAG[] = "route/v1/camera";
 
-typedef struct {
-        httpd_req_t *req;
-        size_t len;
-} jpg_chunking_t;
-
-static size_t jpg_encode_stream(void * arg, size_t index, const void* data, size_t len){
-    jpg_chunking_t *j = (jpg_chunking_t *)arg;
-    if(!index){
-        j->len = 0;
-    }
-    if(httpd_resp_send_chunk(j->req, (const char *)data, len) != ESP_OK){
-        return 0;
-    }
-    j->len += len;
-    return len;
-}
 
 esp_err_t camera_get_handler(httpd_req_t *req){
     camera_fb_t * fb = NULL;
@@ -44,10 +28,8 @@ esp_err_t camera_get_handler(httpd_req_t *req){
             fb_len = fb->len;
             res = httpd_resp_send(req, (const char *)fb->buf, fb->len);
         } else {
-            jpg_chunking_t jchunk = {req, 0};
-            res = frame2jpg_cb(fb, 80, jpg_encode_stream, &jchunk)?ESP_OK:ESP_FAIL;
-            httpd_resp_send_chunk(req, NULL, 0);
-            fb_len = jchunk.len;
+            /* Currently not supported */
+            assert( 0 );
         }
     }
     esp_camera_fb_return(fb);

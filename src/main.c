@@ -46,6 +46,7 @@ static EventGroupHandle_t s_wifi_event_group;
 
 #define CAM_PIN_PWDN    32
 #define CAM_PIN_RESET   -1 //software reset will be performed
+
 #define CAM_PIN_XCLK    0
 #define CAM_PIN_SIOD    26
 #define CAM_PIN_SIOC    27
@@ -89,30 +90,12 @@ static camera_config_t camera_config = {
     .pixel_format = PIXFORMAT_JPEG,  //YUV422,GRAYSCALE,RGB565,JPEG
     .frame_size = FRAMESIZE_QXGA,  //QQVGA-QXGA Do not use sizes above QVGA when not JPEG
 
-    .jpeg_quality = 1, //0-63 lower number means higher quality
+    /* Value in range 0-63 where a lower value means higher quality
+     * 3 is the lowest number I can get to reliably work
+     */
+    .jpeg_quality = 3, //0-63 lower number means higher quality
     .fb_count = 1 //if more than one, i2s runs in continuous mode. Use only with JPEG
 };
-
-
-#if 0
-esp_err_t camera_init(){
-    //power up the camera if PWDN pin is defined
-    if(CAM_PIN_PWDN != -1){
-        gpio_pad_select_gpio(CAM_PIN_PWDN);
-        gpio_set_direction(CAM_PIN_PWDN, GPIO_MODE_OUTPUT);
-        gpio_set_level(CAM_PIN_PWDN, false);
-    }
-
-    //initialize the camera
-    esp_err_t err = esp_camera_init(&camera_config);
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Camera Init Failed");
-        return err;
-    }
-
-    return ESP_OK;
-}
-#endif
 
 
 static void initialize_mdns(const char *hostname)
