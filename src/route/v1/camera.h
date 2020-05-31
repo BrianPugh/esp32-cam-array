@@ -1,5 +1,5 @@
-#ifndef PROJECT_CAMERA_H__
-#define PROJECT_CAMERA_H__
+#ifndef PROJECT_ROUTE_V1_CAMERA_H__
+#define PROJECT_ROUTE_V1_CAMERA_H__
 
 #include "route.h"
 

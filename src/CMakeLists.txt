@@ -1,6 +1,7 @@
 
 idf_component_register(
         SRCS
+            "camera.c"
             "filesystem.c"
             "helpers.c"
             "led.c"

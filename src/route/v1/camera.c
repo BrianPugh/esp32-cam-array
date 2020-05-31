@@ -1,5 +1,4 @@
-#include "esp_camera.h"
-
+#include "../../camera.h"
 #include "route/v1/camera.h"
 
 
@@ -12,7 +11,7 @@ esp_err_t camera_get_handler(httpd_req_t *req){
     size_t fb_len = 0;
     int64_t fr_start = esp_timer_get_time();
 
-    fb = esp_camera_fb_get();
+    fb = camera_fb_get();
     if (!fb) {
         ESP_LOGE(TAG, "Camera capture failed");
         httpd_resp_send_500(req);
